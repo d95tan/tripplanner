@@ -1,30 +1,27 @@
-import "./App.css";
+// Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import { Route, Routes } from "react-router-dom";
+
 import LandingPage from "/src/pages/LandingPage/LandingPage";
-import { useEffect, useState } from "react";
+import SignupPage from "./pages/SignupPage/SignupPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import CalendarPage from "./pages/PlanningPage/CalendarPage/CalendarPage"
+import PlanningPage from "./pages/PlanningPage/PlanningPage";
+
 
 function App() {
 
-  const [state, setState] = useState("");
-
-  const url = "http://api.aviationstack.com/v1/flights?access_key=792d16340973bf877385cb86feb9b75b&flight_iata=tr3"
-
-    useEffect(() => {
-      async function apiCall() {
-        const response = await fetch(url);
-        const json = await response.json();
-        setState(json);
-        console.log(json);
-      }
-      apiCall();
-    },[]);
-
     return (
-        <>
+        <div style={{ width: '100%', backgroundColor: '#f0f0f0', minHeight: '100vh' }}>
             <Routes>
                 <Route path="/" element={<LandingPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="planning/" element={<PlanningPage />} />
+                <Route path="planning/:project/calendar" element={<CalendarPage />} />
             </Routes>
-        </>
+        </ div>
     );
 }
 
