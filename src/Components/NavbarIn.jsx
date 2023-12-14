@@ -34,7 +34,7 @@ export default function NavbarIn({projectsArr}) {
                         height="30"
                         className="d-inline-block align-top"
                     />{" "}
-                    TripPlanner
+                    WanderWell
                 </Navbar.Brand>
                 <NavDropdown title={project || "Select trip"} id="basic-nav-dropdown" style={{backgroundColor: "#7680ab", borderRadius: 15}}>
                     {projectsArr.map((proj) =>

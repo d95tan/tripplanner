@@ -16,7 +16,7 @@ export default function NavbarOut() {
                         height="30"
                         className="d-inline-block align-top"
                     />{" "}
-                    TripPlanner
+                    WanderWell
                 </Navbar.Brand>
                 <Nav className="ml-auto align-items-center">
                     <Nav.Link as={NavLink} to="/signup">
