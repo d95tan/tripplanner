@@ -44,10 +44,11 @@ export default function SignupPage() {
         }
     }
 
+
     return <>
         <NavbarOut />
 
-        <Form onSubmit={handleSubmit}>
+        <Form className={"credentials"} onSubmit={handleSubmit} >
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
@@ -83,7 +84,8 @@ export default function SignupPage() {
                 />
                 { match && <Alert variant="danger">{match}</Alert>}
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <br/>
+            <Button variant="primary" type="submit" style={{marginLeft: "auto", marginRight:"auto",width: "50%"}}>
                 Sign Up
             </Button>
         </Form>

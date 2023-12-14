@@ -22,7 +22,7 @@ export default function Loginpage() {
         if (cred.email === "admin@admin" && cred.password === "password") {
             return navigate("/planning/");
         } else {
-            setError("Invalid username or password");
+            setError("Invalid username or password. Hint: admin@admin password");
         }
     };
 
@@ -30,8 +30,7 @@ export default function Loginpage() {
         <>
             <NavbarOut />
 
-            <Form onSubmit={handleSubmit}>
-                {error && <Alert variant="danger">{error}</Alert>}
+            <Form className="credentials" onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
@@ -41,7 +40,7 @@ export default function Loginpage() {
                         value={cred.email}
                         onChange={handleChange}
                         required
-                    />
+                        />
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
@@ -52,11 +51,13 @@ export default function Loginpage() {
                         value={cred.password}
                         onChange={handleChange}
                         required
-                    />
+                        />
                 </Form.Group>
+                <br/>
                 <Button variant="primary" type="submit">
                     Log in
                 </Button>
+                        {error && <><br /><Alert variant="danger">{error}</Alert></>}
             </Form>
 
             {/* <div>
