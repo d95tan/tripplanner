@@ -1,4 +1,4 @@
-# AeroAPI
+<!-- # AeroAPI
 const apiKey = '6BSiDjyUR3NTWCFVZyXgdkzQroBrCeyg';
 const url = 'https://aeroapi.flightaware.com/aeroapi/flights/TR2';
 
@@ -8,7 +8,7 @@ fetch(url, {
     'Accept': 'application/json; charset=UTF-8',
     'x-apikey': apiKey
   }
-})
+}) -->
 
 # Open Meteo
 https://archive-api.open-meteo.com/v1/archive?latitude=35.6895&longitude=139.6917&start_date=2022-12-22&end_date=2022-12-31&hourly=temperature_2m&timezone=Asia%2FTokyo
@@ -18,7 +18,19 @@ https://www.exchangerate-api.com/docs/supported-currencies
 https://api.exchangerate-api.com/v4/latest/sgd
 https://open.er-api.com/v6/latest/USD
 
-
+# Aviation Stack
+const url4 = "http://api.aviationstack.com/v1/flights?access_key=792d16340973bf877385cb86feb9b75b"
+useEffect(() => {
+    (async function () {
+        const response = await fetch(url4, {
+            redirect: "manual",
+            referrerPolicy: "unsafe-url"
+        });
+        const json = await response.json();
+        // setState(json);
+        console.log("aviationstack", json);
+    })();
+}, []);
 
     // const [state, setState] = useState("");
 
@@ -34,3 +46,4 @@ https://open.er-api.com/v6/latest/USD
     //     }
     //     apiCall();
     // }, []);
+
