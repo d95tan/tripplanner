@@ -1,16 +1,20 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 
 import NavbarIn from "../../Components/NavbarIn";
+import { getProjects } from "../../api/getProjects";
 
 export default function PlanningPage() {
     const [projectsArr, setProjectsArr] = useState([
-        "Sydney",
-        "Los Angeles",
-        "Europe Tour",
-        "Bangkok",
     ]);
+
+    useEffect(() => {
+        (async function () {
+            const data = await getProjects();
+            setProjectsArr(data);
+        })()
+    }, []);
 
     return (
         <>

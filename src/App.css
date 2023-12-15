@@ -9,3 +9,51 @@
     flex-direction: column;
     width: 275px
 }
+
+.calendar-container {
+    white-space: nowrap;
+    margin-left: 1.5rem;
+}
+
+.calendar-day-card {
+    width: 11rem; 
+    height:39.5rem;
+    display:inline-block; 
+    margin-right:2px
+}
+
+.calendar-day-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-bottom: 0;
+}
+
+.calendar-items-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calendar-timebar-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.calendar-card {
+    width: 10.75rem;
+}
+
+.calendar-card-title {
+    font-size:smaller;
+}
+
+.calendar-card-text {
+    font-size:x-small;
+}

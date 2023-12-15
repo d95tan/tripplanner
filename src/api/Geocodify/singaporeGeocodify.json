@@ -1,0 +1,121 @@
+{
+    "meta": { "code": 200 },
+    "response": {
+        "geocoding": {
+            "version": "api.v2",
+            "attribution": "https://geocodify.com/attribution",
+            "query": {
+                "text": "singapore",
+                "size": 10,
+                "layers": [
+                    "venue",
+                    "street",
+                    "country",
+                    "macroregion",
+                    "region",
+                    "county",
+                    "localadmin",
+                    "locality",
+                    "borough",
+                    "neighbourhood",
+                    "continent",
+                    "empire",
+                    "dependency",
+                    "macrocounty",
+                    "macrohood",
+                    "microhood",
+                    "disputed",
+                    "postalcode",
+                    "ocean",
+                    "marinearea"
+                ],
+                "private": false,
+                "lang": {
+                    "name": "English",
+                    "iso6391": "en",
+                    "iso6393": "eng",
+                    "via": "default",
+                    "defaulted": true
+                },
+                "querySize": 20,
+                "parser": "libpostal",
+                "parsed_text": { "country": "singapore" }
+            },
+            "warnings": ["performance optimization: excluding 'address' layer"],
+            "timestamp": 1702634873427,
+            "terms": "https://geocodify.com/terms"
+        },
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [103.801292, 1.366923]
+                },
+                "properties": {
+                    "id": "102032341",
+                    "gid": "whosonfirst:locality:102032341",
+                    "layer": "locality",
+                    "source": "whosonfirst",
+                    "source_id": "102032341",
+                    "country_code": "SG",
+                    "name": "Singapore",
+                    "confidence": 0.6,
+                    "match_type": "fallback",
+                    "accuracy": "centroid",
+                    "country": "Singapore",
+                    "country_gid": "whosonfirst:country:85632605",
+                    "country_a": "SGP",
+                    "region": "Singapore",
+                    "region_gid": "whosonfirst:region:1729834133",
+                    "county": "Singapore",
+                    "county_gid": "whosonfirst:county:1729834131",
+                    "locality": "Singapore",
+                    "locality_gid": "whosonfirst:locality:102032341",
+                    "continent": "Asia",
+                    "continent_gid": "whosonfirst:continent:102191569",
+                    "label": "Singapore"
+                },
+                "bbox": [103.605701, 1.158699, 104.088483, 1.470775]
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [29.31502, -24.56233]
+                },
+                "properties": {
+                    "id": "1242672009",
+                    "gid": "whosonfirst:locality:1242672009",
+                    "layer": "locality",
+                    "source": "whosonfirst",
+                    "source_id": "1242672009",
+                    "country_code": "ZA",
+                    "name": "Singapore",
+                    "confidence": 0.6,
+                    "match_type": "fallback",
+                    "accuracy": "centroid",
+                    "country": "South Africa",
+                    "country_gid": "whosonfirst:country:85633813",
+                    "country_a": "ZAF",
+                    "region": "Limpopo",
+                    "region_gid": "whosonfirst:region:85688935",
+                    "region_a": "NP",
+                    "county": "Waterberg",
+                    "county_gid": "whosonfirst:county:1108730579",
+                    "county_a": "WA",
+                    "localadmin": "Modimolle-Mookgophong",
+                    "localadmin_gid": "whosonfirst:localadmin:1763143683",
+                    "locality": "Singapore",
+                    "locality_gid": "whosonfirst:locality:1242672009",
+                    "continent": "Africa",
+                    "continent_gid": "whosonfirst:continent:102191573",
+                    "label": "Singapore, NP, South Africa"
+                },
+                "bbox": [29.29502, -24.58233, 29.33502, -24.54233]
+            }
+        ],
+        "bbox": [29.29502, -24.58233, 104.088483, 1.470775]
+    }
+}

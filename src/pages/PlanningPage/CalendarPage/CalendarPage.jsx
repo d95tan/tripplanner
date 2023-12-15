@@ -1,31 +1,37 @@
-import { useParams } from "react-router-dom";
+import { getProjects } from "../../../api/getProjects";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom"
 
 import NavbarIn from "../../../Components/NavbarIn";
 import CalendarItem from "./Components/CalendarItem";
 
 export default function CalendarPage() {
     let { project } = useParams();
-    // console.log(project)
+    
+    // const data = airtableService();
+    // const dates = data;
 
-    const url4 = "http://api.aviationstack.com/v1/flights?access_key=792d16340973bf877385cb86feb9b75b"
-    useEffect(() => {
-        (async function () {
-            const response = await fetch(url4, {
-                redirect: "manual",
-                referrerPolicy: "unsafe-url"
-            });
-            const json = await response.json();
-            // setState(json);
-            console.log("aviationstack", json);
-        })();
-    }, []);
+    // useEffect(() => {
+    //     (async function () {
+    //         const coord = await geocodifyLatLong(project);
+    //         console.log(coord)
+    //     })();
+    // }, [project]);
 
+    
 
     return (
         <>
             <NavbarIn />
-            <CalendarItem />
+            {/* <div className="calendar-container">
+                <CalendarTimeBar />
+                {dates.map(d => <CalendarDay
+                    key={d.date}
+                    day={d.day}
+                    date={d.date}
+                    events={d.events}
+                />)}
+            </div> */}
         </>
     );
 }
