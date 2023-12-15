@@ -36,7 +36,7 @@ export default function NavbarIn({projectsArr}) {
                     />{" "}
                     WanderWell
                 </Navbar.Brand>
-                <NavDropdown title={project || "Select trip"} id="basic-nav-dropdown" style={{backgroundColor: "#7680ab", borderRadius: 15}}>
+                <NavDropdown title={project || "Select trip"} id="basic-nav-dropdown" style={{background: "#DDDDDD", borderRadius: 15}}>
                     {projectsArr.map((proj) =>
                         <NavDropdown.Item
                             key={proj}

@@ -11,7 +11,13 @@ export async function getProjects() {
     }
     const response = await fetch(url, options);
     const json = await response.json();
-    const projects = json.tables.map(table => table.name)
+    const projects = json.tables.map(table => {
+        return {
+            name: table.name,
+            start: new Date(JSON.parse(table.description)[0].join(",")),
+            end: new Date(JSON.parse(table.description)[1].join(","))
+        }
+    })
     console.log(projects)
     return projects;
 }
