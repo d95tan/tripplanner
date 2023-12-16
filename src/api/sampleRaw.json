@@ -1,0 +1,58 @@
+{
+    "start": "2023-12-24T16:00:00.000Z",
+    "end": "2023-12-30T16:00:00.000Z",
+    "events": [
+        {
+            "name": "Gamble",
+            "date": "2023-12-26T16:00:00.000Z",
+            "place": "Casino",
+            "time": 2100,
+            "duration": 5
+        },
+        {
+            "name": "dinner",
+            "date": "2023-12-24T16:00:00.000Z",
+            "place": "macs",
+            "time": 1900,
+            "duration": 2
+        }
+    ],
+    "info": {
+        "flights": [
+            {
+                "name": "tr2",
+                "date": "2023-12-24T16:00:00.000Z",
+                "dep": "SIN",
+                "arr": "SYD",
+                "time": 100,
+                "duration": 16
+            },
+            {
+                "name": "tr5",
+                "date": "2023-12-30T16:00:00.000Z",
+                "dep": "SYD",
+                "arr": "SIN",
+                "time": 1400,
+                "duration": 16
+            }
+        ],
+        "accoms": [
+            {
+                "name": "Airbnb",
+                "start": "2023-12-28T07:00:00.000Z",
+                "end": "2023-12-31T03:00:00.000Z",
+                "place": "Near macs"
+            },
+            {
+                "name": "Hotel Syd",
+                "start": "2023-12-25T07:00:00.000Z",
+                "end": "2023-12-28T03:30:00.000Z",
+                "place": "Opera House"
+            }
+        ],
+        "coords": [
+            -33.868633,
+            151.209421
+        ]
+    }
+}
