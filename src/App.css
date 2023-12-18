@@ -29,6 +29,7 @@
     padding-left: 2px;
     padding-right: 2px;
     padding-bottom: 0;
+    padding-top: 5px;
 }
 
 .calendar-items-container {
@@ -44,6 +45,7 @@
     align-items: center;
     padding-left: 2px;
     padding-right: 2px;
+    padding-top: 5px;
 }
 
 .calendar-card {

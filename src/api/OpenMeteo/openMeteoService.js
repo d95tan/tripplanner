@@ -1,29 +1,38 @@
+import { add, differenceInCalendarDays, isAfter, sub } from "date-fns";
 import { openMeteoForecastApi, openMeteoHistoricalApi } from "./OpenMeteoApi";
+import { sortWeatherData } from "./sortWeatherData";
 
-export function openMeteoService({lat, long}, start, end) {
-    // if (start-now > 14 days),
-        // call historical data
-        // return temps = {historical: [lo,hi],[lo,hi],[lo,hi]}
+export async function openMeteoService(coords, start, end) {
+    const today = new Date(Date.now())
 
-    // else:
-        // if (end <= 14 days),
-            // call forecast(start,end)
-            // return temps = {forecast: [lo,hi],[lo,hi],[lo,hi]}
-        // else:
-            // call forecast(start, now+14 days)
-            // call historical(now+15days, end)
-    // return temps = {forecast: [lo,hi],[lo,hi],[lo,hi], historical: [lo,hi],[lo,hi],[lo,hi]}
+    let historical, forecast;
+
+    // Holiday is passed
+    if (isAfter(today, end)) {
+        return null;
+    }
     
-    const fake = [
-        { date: new Date(2023, 11, 25), forecast: true, low: 15, high: 20, code: 45 },
-        { date: new Date(2023, 11, 26), forecast: true, low: 15, high: 20, code: 45 },
-        { date: new Date(2023, 11, 27), forecast: true, low: 15, high: 20, code: 45 },
-        { date: new Date(2023, 11, 28), forecast: false, low: 15, high: 20, },
-        { date: new Date(2023, 11, 29), forecast: false, low: 15, high: 20 },
-        { date: new Date(2023, 11, 30), forecast: false, low: 15, high: 20},
-        { date: new Date(2023, 11, 31), forecast: false, low: 15, high: 20 },
-    ]
-    
-    return fake;
+    // Holiday has started
+    if (isAfter(today, end)) {
+        start = today;
+    }
+
+
+    if (differenceInCalendarDays(start, today) > 14) {
+        historical = await openMeteoHistoricalApi(coords, sub(start, { years: 1 }), sub(end, {years:1}));
+    }
+    else {
+        if (differenceInCalendarDays(end, today) <= 14) {
+            forecast = await openMeteoForecastApi(coords, start, end);
+        }
+        else {
+            forecast = await openMeteoForecastApi(coords, start, add(start, {day: 14}))
+            historical = await openMeteoHistoricalApi(coords, add(start, {days:15}), sub(end, {years:1}))
+        }
+    }
+
+    const weatherData = await sortWeatherData(forecast, historical);
+
+    return weatherData;   
 }
 

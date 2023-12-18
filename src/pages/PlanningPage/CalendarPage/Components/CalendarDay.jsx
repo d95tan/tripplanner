@@ -5,7 +5,7 @@ import { format } from "date-fns";
 
 export default function CalendarDay({ date, events, accoms, flights, weather }) {
     const dateString = format(date, "eee, do MMM yy")
-    const weatherString = `H: ${weather.high}, L:${weather.low}`
+    const weatherString = `H: ${weather.high}, L:${weather.low} ${weather.weatherString? weather.weatherString: ""}`
 
     const calculatePosition = (start, duration) => {
         const top = (SLOT_HEIGHT * parseInt(start)) / 100;
@@ -19,15 +19,16 @@ export default function CalendarDay({ date, events, accoms, flights, weather }) 
                 <Card.Title as="p">
                     {dateString}
                 </Card.Title>
-                {/* <Card.Subtitle as="p" style={{ fontSize: "xx-small" }}>
+                <Card.Subtitle as="p" style={{ fontSize: "xx-small" }}>
                     {weatherString}
-                </Card.Subtitle> */}
+                </Card.Subtitle>
                 <div className="calendar-items-container">
                 {events.map((e) => {
                     const { top, height } = calculatePosition(e.time, e.duration)
                         return <CalendarItem
                             key={e.time}
-                            data = {e}
+                            data={e}
+                            type="events"
                             bg="primary"
                             style= {{position: "absolute", top: `${top}rem`, height: `${height}rem`}}
                         />
@@ -36,7 +37,8 @@ export default function CalendarDay({ date, events, accoms, flights, weather }) 
                     const { top, height } = calculatePosition(e.time, e.duration)
                         return <CalendarItem
                             key={e.time}
-                            data = {e}
+                            data={e}
+                            type="flights"
                             bg="success"
                             style= {{position: "absolute", top: `${top}rem`, height: `${height}rem`}}
                         />
@@ -47,11 +49,12 @@ export default function CalendarDay({ date, events, accoms, flights, weather }) 
                         if (e.timeIn === null && e.timeOut === null) {
                             return;
                     }
-                    const { top, height } = calculatePosition(e.timeIn || e.timeOut, e.duration)
+                    const { top, height } = calculatePosition(e.timeIn || e.timeOut, 2)
                         return <CalendarItem
-                            key={e.time}
-                            data = {e}
-                            bg="primary"
+                            key={e.name}
+                            data={e}
+                            type="accoms"
+                            bg="secondary"
                             style= {{position: "absolute", top: `${top}rem`, height: `${height}rem`}}
                         />
                 })}
