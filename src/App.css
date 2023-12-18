@@ -19,7 +19,8 @@
     width: 11rem; 
     height:39.5rem;
     display:inline-block; 
-    margin-right:2px
+    margin-right:2px;
+    box-shadow: 1px 1px 3px lightgrey;
 }
 
 .calendar-day-body {

@@ -8,7 +8,7 @@ for (let i = 0; i < 24; i++) {
 }
 
 export default function CalendarTimeBar() {
-    return <Card border="primary" className="calendar-day-card" style={{ width: "4rem" }}>
+    return <Card bg="light" className="calendar-day-card" style={{ width: "4rem" }}>
         <Card.Body className="calendar-timebar-body">
             <Card.Title as="p">Time</Card.Title>
             <Card.Subtitle as="p" style={{ fontSize: "xx-small" }}>

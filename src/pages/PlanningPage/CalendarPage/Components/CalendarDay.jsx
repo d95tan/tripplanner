@@ -14,7 +14,7 @@ export default function CalendarDay({ date, events, accoms, flights, weather }) 
     };
 
     return (
-        <Card border="primary" className="calendar-day-card">
+        <Card bg="light" className="calendar-day-card">
             <Card.Body className="calendar-day-body">
                 <Card.Title as="p">
                     {dateString}
@@ -30,7 +30,7 @@ export default function CalendarDay({ date, events, accoms, flights, weather }) 
                             data={e}
                             type="events"
                             bg="primary"
-                            style= {{position: "absolute", top: `${top}rem`, height: `${height}rem`}}
+                            style= {{position: "absolute", top: `${top}rem`, height: `${height}rem`, boxShadow: "-1px -1px 5px lightblue inset"}}
                         />
                 })}
                 {flights.map((e) => {
@@ -40,7 +40,7 @@ export default function CalendarDay({ date, events, accoms, flights, weather }) 
                             data={e}
                             type="flights"
                             bg="success"
-                            style= {{position: "absolute", top: `${top}rem`, height: `${height}rem`}}
+                            style= {{position: "absolute", top: `${top}rem`, height: `${height}rem`, boxShadow: "-1px -1px 5px lightgreen inset"}}
                         />
                 })}
                     {accoms.map((e) => {
@@ -55,7 +55,7 @@ export default function CalendarDay({ date, events, accoms, flights, weather }) 
                             data={e}
                             type="accoms"
                             bg="secondary"
-                            style= {{position: "absolute", top: `${top}rem`, height: `${height}rem`}}
+                            style= {{position: "absolute", top: `${top}rem`, height: `${height}rem`, boxShadow: "-1px -1px 3px lightgrey inset"}}
                         />
                 })}
                 

@@ -8,7 +8,7 @@ export default function CalendarItem({ data, type, style }) {
         accoms: "secondary"
     }
 
-    return <Card className="calendar-card" border="secondary" style={style} bg={background[type]}>
+    return <Card className="calendar-card" border={background[type]} style={style} bg={background[type]}>
         <Card.Body style={{padding:"2px", lineHeight:"0"}}>
             <Card.Title className="calendar-card-title">
                 {data.timeIn ? <>Check-in at {data.name}</> :
