@@ -1,11 +1,11 @@
 import Card from "react-bootstrap/Card"
 
-export default function CalendarItem({name, address, time, duration, style}) {
-    return <Card className="calendar-card" border="secondary" style={style}>
+export default function CalendarItem({ name, place, duration, style, bg}) {
+    return <Card className="calendar-card" border="secondary" style={style} bg={bg}>
         <Card.Body style={{padding:"2px", lineHeight:"0"}}>
             <Card.Title className="calendar-card-title">{name}</Card.Title>
             {duration > 2 ? <Card.Text className="calendar-card-text">
-                {address}
+                {place}
             </Card.Text> : <></>}
         </Card.Body>
     </ Card>
