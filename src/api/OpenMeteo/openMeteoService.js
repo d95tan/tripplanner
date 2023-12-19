@@ -1,5 +1,5 @@
 import { add, differenceInCalendarDays, isAfter, sub } from "date-fns";
-import { openMeteoForecastApi, openMeteoHistoricalApi } from "./OpenMeteoApi";
+import { openMeteoForecastApi, openMeteoHistoricalApi } from "./openMeteoApi";
 import { sortWeatherData } from "./sortWeatherData";
 
 export async function openMeteoService(coords, start, end) {
