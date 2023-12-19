@@ -1,7 +1,6 @@
-// TODO: get weather
 // TODO: get exchange rate
 
-import { airtableService } from "./Airtable/AirtableService";
+import { airtableService } from "./Airtable/airtableService";
 import { geocodifyLatLong } from "./Geocodify/geocodifyService";
 import { openMeteoService } from "./OpenMeteo/openMeteoService"
 
