@@ -1,7 +1,8 @@
 import Card from "react-bootstrap/Card";
 import CalendarItem from "./CalendarItem";
-import { SLOT_HEIGHT } from "../../../../config";
+import { REMtoPX, SLOT_HEIGHT } from "../../../../config";
 import { format } from "date-fns";
+
 
 export default function CalendarDay({ date, events, accoms, flights, weather }) {
     const dateString = format(date, "eee, do MMM yy")
@@ -13,8 +14,18 @@ export default function CalendarDay({ date, events, accoms, flights, weather }) 
         return {top, height}
     };
 
+    const handleClick = (e) => {
+        console.log(e.target);
+        const time = parseInt(100 * (e.pageY - e.target.offsetTop - e.target.children[0].offsetHeight) / (REMtoPX * 1.5))
+        let roundedTime = Math.round(time / 50) * 50;
+        if (roundedTime % 100 === 50) {
+            roundedTime -= 20;
+        }
+        console.log(roundedTime)
+    }
+
     return (
-        <Card bg="light" className="calendar-day-card">
+        <Card bg="light" className="calendar-day-card" onClick={handleClick}>
             <Card.Body className="calendar-day-body">
                 <Card.Title as="p">
                     {dateString}
@@ -61,6 +72,6 @@ export default function CalendarDay({ date, events, accoms, flights, weather }) 
                 
                 </div>
             </Card.Body>
-        </Card>
+            </Card>
     );
 }

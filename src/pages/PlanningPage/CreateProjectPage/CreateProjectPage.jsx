@@ -4,10 +4,9 @@ import Button from "react-bootstrap/Button";
 import { format } from "date-fns";
 import { useState } from "react";
 import { createTrip } from "../../../api/createTrip";
-import { redirect, useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 function removeLeadingZeroes(dateString) {
-    console.log(dateString)
     return dateString.split("-").map(s => s[0] === "0"? s[1]: s).join("-")
 }
 
@@ -37,7 +36,6 @@ export default function CreateProjectPage() {
                 end: new Date(JSON.parse(trip.description)[1].join("-"))
             }])
         navigate(`/planning/${trip.name}`);
-        // setProjectsArr([...projectsArr, {name: trip.})
     }
 
     return <>
@@ -82,35 +80,5 @@ export default function CreateProjectPage() {
                 Create
             </Button>
         </Form>
-
-
-        {/* <Form className="credentials" onSubmit={handleSubmit}>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                        name="email"
-                        type="email"
-                        placeholder="Enter email"
-                        // value={}
-                        // onChange={}
-                        required
-                        />
-                </Form.Group>
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        // value={}
-                        // onChange={}
-                        required
-                        />
-                </Form.Group>
-                <br/>
-                <Button variant="primary" type="submit">
-                    Log in
-                </Button>
-            </Form> */}
     </>
 }
