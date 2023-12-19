@@ -1,4 +1,4 @@
-import { add, differenceInCalendarDays, isAfter, sub } from "date-fns";
+import { add, addDays, differenceInCalendarDays, isAfter, sub, subYears } from "date-fns";
 import { openMeteoForecastApi, openMeteoHistoricalApi } from "./openMeteoApi";
 import { sortWeatherData } from "./sortWeatherData";
 
@@ -17,17 +17,19 @@ export async function openMeteoService(coords, start, end) {
         start = today;
     }
 
-
+    //holiday is more than 14 days away
     if (differenceInCalendarDays(start, today) > 14) {
-        historical = await openMeteoHistoricalApi(coords, sub(start, { years: 1 }), sub(end, {years:1}));
+        historical = await openMeteoHistoricalApi(coords, subYears(start, 1), subYears(end, 1));
     }
     else {
+        //holiday ends in less than 14 days
         if (differenceInCalendarDays(end, today) <= 14) {
             forecast = await openMeteoForecastApi(coords, start, end);
         }
+        //holiday starts in less than 14 days, ends more than 14 days away
         else {
-            forecast = await openMeteoForecastApi(coords, start, add(start, {day: 14}))
-            historical = await openMeteoHistoricalApi(coords, add(start, {days:15}), sub(end, {years:1}))
+            forecast = await openMeteoForecastApi(coords, start, addDays(today, 14))
+            historical = await openMeteoHistoricalApi(coords, subYears(addDays(today, 15), 1), subYears(end, 1))
         }
     }
 

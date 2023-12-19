@@ -1,0 +1,85 @@
+{
+    "id": "tblorjdxAka8CWflE",
+    "name": "New York",
+    "description": "[[2024,01,01], [2024,01,03]]",
+    "primaryFieldId": "fldv8K5v77tHe5lIQ",
+    "fields": [
+        {
+            "type": "singleLineText",
+            "id": "fldv8K5v77tHe5lIQ",
+            "name": "name"
+        },
+        {
+            "type": "multipleSelects",
+            "options": {
+                "choices": [
+                    {
+                        "id": "selBEEo1YIMp3Nb7h",
+                        "name": "dates",
+                        "color": "grayLight2"
+                    },
+                    {
+                        "id": "selZifol31xUwG1nf",
+                        "name": "event",
+                        "color": "grayLight2"
+                    },
+                    {
+                        "id": "sel0RrPMxsFKpBzvT",
+                        "name": "place",
+                        "color": "grayLight2"
+                    },
+                    {
+                        "id": "selaW2vQu2VhmJhxE",
+                        "name": "info-flight",
+                        "color": "grayLight2"
+                    },
+                    {
+                        "id": "selsVlrALFIuTR92L",
+                        "name": "info-accoms",
+                        "color": "grayLight2"
+                    },
+                    {
+                        "id": "selcWlb0WoiMCvSrM",
+                        "name": "place",
+                        "color": "grayLight2"
+                    }
+                ]
+            },
+            "id": "fldeBvtwUOgZood93",
+            "name": "type"
+        },
+        {
+            "type": "multilineText",
+            "id": "fldu9S8gvMEIToeGu",
+            "name": "date"
+        },
+        {
+            "type": "multilineText",
+            "id": "fldYDmZdrL4B9Cxar",
+            "name": "place"
+        },
+        {
+            "type": "number",
+            "options": {
+                "precision": 0
+            },
+            "id": "fldUHutzJ3c30CaaN",
+            "name": "time"
+        },
+        {
+            "type": "number",
+            "options": {
+                "precision": 0
+            },
+            "id": "fldXLFrkHLNSelnlD",
+            "name": "duration"
+        }
+    ],
+    "views": [
+        {
+            "id": "viwAKyKHKmej97Nn4",
+            "name": "Grid view",
+            "type": "grid"
+        }
+    ]
+}

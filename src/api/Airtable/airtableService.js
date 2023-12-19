@@ -1,8 +1,21 @@
-import { airtableApi } from "./airtableApi"
+export function formatRecordBody({ name, type, date, place, time, duration }) {
+    
+    const typeArr = [type];
 
-export async function airtableService(project, method, data) {
-    if (method === "GET") {
-        const airtable = await airtableApi(project, method)
-        return airtable;
+    const body = {
+        fields: {
+            name,
+            type: typeArr,
+            date,
+            place,
+            time,
+            duration
+        }
     }
+
+    const json = JSON.stringify(body);
+    return json;
 }
+
+
+//{"fields":{"name":"dates","type":["dates"],"date":"[[2024,1,1],[2024,1,16]]"}}

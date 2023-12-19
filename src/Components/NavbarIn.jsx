@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useParams, NavLink } from "react-router-dom";
 
@@ -8,19 +8,18 @@ import Container from "react-bootstrap/Container";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 
-export default function NavbarIn({projectsArr}) {
+export default function NavbarIn({ projectsArr }) {
 
-    // Testing purposes only - should be accessed from a db
-    if (!projectsArr) {
-        projectsArr = ["Sydney",
-        "Los Angeles",
-        "Europe Tour",
-        "Bangkok"]
-    }
+    const [pa, setPa] = useState(projectsArr)
 
+    useEffect(() => {
+        (async function () {
+            setPa(projectsArr || ["Loading"]);
+        })()
+    }, [projectsArr]);
     const { project } = useParams();
     const projectRoute = "/planning/" + project + "/"
-    const [active, setActive] = useState(!!project);
+    const active = !!project;
 
     return (
         <Navbar>
@@ -37,7 +36,7 @@ export default function NavbarIn({projectsArr}) {
                     WanderWell
                 </Navbar.Brand>
                 <NavDropdown title={project || "Select trip"} id="basic-nav-dropdown" style={{background: "#DDDDDD", borderRadius: 15}}>
-                    {projectsArr.map((proj) =>
+                    {pa.map((proj) =>
                         <NavDropdown.Item
                             key={proj}
                             as={NavLink}
@@ -49,9 +48,9 @@ export default function NavbarIn({projectsArr}) {
 
                 {active && ( <>
                     <Nav.Link as={NavLink} to={projectRoute}>Calendar Page</Nav.Link>
-                    <Nav.Link as={NavLink} to={projectRoute + "places"}>Places</Nav.Link>
-                    <Nav.Link as={NavLink} to={projectRoute + "info"}>Info</Nav.Link>
-                    <Nav.Link as={NavLink} to={projectRoute + "finances"}>Finances</Nav.Link>
+                    <Nav.Link as={NavLink} to={projectRoute + "places/"}>Places</Nav.Link>
+                    <Nav.Link as={NavLink} to={projectRoute + "info/"}>Info</Nav.Link>
+                    <Nav.Link as={NavLink} to={projectRoute + "finances/"}>Finances</Nav.Link>
                     </>)}
                     
                 </Nav>

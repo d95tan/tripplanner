@@ -1,6 +1,6 @@
 // TODO: get exchange rate
 
-import { airtableService } from "./Airtable/airtableService";
+import { airtableApi } from "./Airtable/airtableApi";
 import { geocodifyLatLong } from "./Geocodify/geocodifyService";
 import { openMeteoService } from "./OpenMeteo/openMeteoService"
 
@@ -27,7 +27,7 @@ export async function getTripData(project) {
     const info = {flights, accoms, coords}
     // console.log("getData");
     
-    const raw = await airtableService(project, "GET");
+    const raw = await airtableApi(project, "GET");
     for (const item of raw.records) {
         const name = item.fields.name;
         const type = item.fields.type?.[0];

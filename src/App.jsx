@@ -12,6 +12,9 @@ import PlanningPage from "./pages/PlanningPage/PlanningPage";
 import PlacesPage from "./pages/PlanningPage/PlacesPage/PlacesPage";
 import FinancesPage from "./pages/PlanningPage/FinancesPage/FinancesPage";
 import InfoPage from "./pages/PlanningPage/InfoPage/InfoPage";
+import CreateProjectPage from "./pages/PlanningPage/CreateProjectPage/CreateProjectPage"
+import ProjectsPage from "./pages/PlanningPage/ProjectsPage/ProjectsPage";
+import SingleProjectPage from "./pages/PlanningPage/SingleProjectPage"
 
 
 function App() {
@@ -22,11 +25,39 @@ function App() {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="planning/" element={<PlanningPage />} />
-                <Route path="planning/:project/" element={<CalendarPage />} />
-                <Route path="planning/:project/places" element={<PlacesPage />} />
-                <Route path="planning/:project/finances" element={<FinancesPage />} />
-                <Route path="planning/:project/info" element={<InfoPage />} />
+
+                <Route path="planning/" element={<PlanningPage />}>
+                    <Route path="" element={<ProjectsPage />} />
+                </ Route>
+
+                <Route path="planning/" element={<PlanningPage />}>
+                    <Route path="create/" element={<CreateProjectPage />} />
+                </ Route>
+
+                <Route path="planning/" element={<PlanningPage />}>
+                    <Route path=":project/" element={<SingleProjectPage />}>
+                        <Route path="" element={<CalendarPage />} />
+                    </Route>
+                </ Route>
+                
+                <Route path="planning/" element={<PlanningPage />}>
+                    <Route path=":project/" element={<SingleProjectPage />} >
+                        <Route path="places/" element={<PlacesPage />} />
+                    </ Route>
+                </ Route>
+                
+                <Route path="planning/" element={<PlanningPage />}>
+                    <Route path=":project/" element={<SingleProjectPage />} >
+                        <Route path="finances/" element={<FinancesPage />} />
+                    </ Route>
+                </ Route>
+                
+                <Route path="planning/" element={<PlanningPage />}>
+                    <Route path=":project/" element={<SingleProjectPage />} >
+                        <Route path="info/" element={<InfoPage />} />
+                    </ Route>
+                </ Route>
+
             </Routes>
         </>
     );
