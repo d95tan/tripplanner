@@ -1,5 +1,7 @@
 // config.js
 
+import { format } from "date-fns";
+
 // Height of each calendar item in REM
 export const SLOT_HEIGHT = 1.5;
 
@@ -9,7 +11,8 @@ export const PXinREM = parseInt(
 );
 
 // Airtable API Key
-export const AIRTABLE_KEY = "patytdRdWs3N7GSM1.809a19af2d78d31544c220073019e549d2afa251d91098ed0f74ddda2e3294fc";
+export const AIRTABLE_KEY =
+    "patytdRdWs3N7GSM1.809a19af2d78d31544c220073019e549d2afa251d91098ed0f74ddda2e3294fc";
 
 // Airtable new project table format
 export const AIRTABLE_FIELDS_TEMPLATE = [
@@ -57,7 +60,7 @@ export const calculatePosition = (start, duration) => {
     return { top, height };
 };
 
-const padTime = (time) => {
+export const padTime = (time) => {
     return time.toString().padStart(4, "0");
 };
 
@@ -103,4 +106,38 @@ const timeToInt = (time) => {
         int += 20;
     }
     return int;
+};
+
+export const timeToInputTime = (time) => {
+    const padded = padTime(time);
+    const formatted = `${padded.slice(0, 2)}:${padded.slice(2)}`;
+    return formatted;
+};
+
+export const inputTimeToTime = (inputTime) => {
+    return parseInt(inputTime.replace(":", ""));
+};
+
+export const getDuration = (start, end) => {
+    const difference = inputTimeToTime(end) - inputTimeToTime(start);
+    if (difference % 100 !== 0) {
+        return (difference + 20) / 50;
+    } else {
+        return difference / 50;
+    }
+};
+
+export const dateToAirtableDate = (date) => {
+    return format(date, "[yyyy,M,d]");
+};
+
+export const airtableDateToDate = (airtableDate) => {
+    return new Date(JSON.parse(airtableDate).join("-"));
+};
+
+export const airtableDateRangeToDate = (airtableDateRange) => {
+    const arr = JSON.parse(airtableDateRange);
+    const start = new Date(arr[0].join("-"));
+    const end = new Date(arr[1].join("-"));
+    return [start, end]
 };

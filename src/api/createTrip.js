@@ -15,7 +15,7 @@ export async function createTrip(data) {
     const createTableResponse = await airtableMetaApi("POST", bodyString);
 
     const recordBody = formatRecordBody({ name: "dates", type: "dates", date: dates })
-    airtableApi(data.place.replaceAll(" ","%20"), "POST", recordBody);
+    airtableApi(data.place, "POST", recordBody);
 
     return createTableResponse;
 }

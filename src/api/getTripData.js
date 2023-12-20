@@ -1,5 +1,6 @@
 // TODO: get exchange rate
 
+import { airtableDateRangeToDate, airtableDateToDate } from "../config";
 import { airtableApi } from "./Airtable/airtableApi";
 import { geocodifyLatLong } from "./Geocodify/geocodifyService";
 import { openMeteoService } from "./OpenMeteo/openMeteoService"
@@ -38,13 +39,12 @@ export async function getTripData(project) {
         
         // console.log(item);
         if (type === "dates") {
-            start = new Date(JSON.parse(date)[0].join("-"))
-            end = new Date(JSON.parse(date)[1].join("-"))
+            [start, end] = airtableDateRangeToDate(date)
         }
         else if (type === "event") {
             events.push({
                 name,
-                date: new Date(JSON.parse(date).join("-")),
+                date: airtableDateToDate(date),
                 place,
                 time,
                 duration,
@@ -53,7 +53,7 @@ export async function getTripData(project) {
         else if (type === "info-flight") {
             flights.push({
                 name,
-                date: new Date(JSON.parse(date).join("-")),
+                date: airtableDateToDate(date),
                 dep: JSON.parse(place)[0],
                 arr: JSON.parse(place)[1],
                 time,

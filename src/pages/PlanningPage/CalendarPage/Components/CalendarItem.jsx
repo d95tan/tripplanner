@@ -2,11 +2,10 @@ import { useRef, useState } from "react";
 import Card from "react-bootstrap/Card";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
-import { formatAirtableTime, getEndTime } from "../../../../config";
-import Overlay from "react-bootstrap/Overlay";
-import Tooltip from "react-bootstrap/Tooltip";
+import CalendarItemPopover from "./CalendarItemPopover";
+import NewCalendarItemPopover from "./NewCalendarItemPopover";
 
-export default function CalendarItem({ data, type, style }) {
+export default function CalendarItem({ data, type, style, addNewEvent }) {
     const background = {
         events: "primary",
         newEvent: "info",
@@ -14,41 +13,31 @@ export default function CalendarItem({ data, type, style }) {
         accoms: "secondary",
     };
 
-    const [show, setShow] = useState(false);
+    const [showPopover, setShowPopover] = useState(false);
 
-    const target = useRef(null);
+    const toggleShow = (show) => {
+        setShowPopover(show);
+    }
 
     const renderPopover = (props) => {
         if (type === "newEvent") {
-            return <></>;
-        }
+            return (
+                <Popover id="popover-newEvent" className="calendar-item-popover" {...props}>
+                    <NewCalendarItemPopover
+                        time={data.time}
+                        date={data.date}
+                        addNewEvent={addNewEvent}
+                        setShowPopover={setShowPopover}
+                        showPopover={showPopover}
+                    />
+                </Popover>
+                );
+            }
         return (
-        <Popover id="popover-basic" class="calendar-item-popover" {...props}>
-            <Popover.Header as="h3">
-                {data.timeIn ? (
-                    <>Check-in at {data.name}</>
-                ) : data.timeOut ? (
-                    <>Check-out from {data.name}</>
-                ) : (
-                    <>{data.name}</>
-                )}
-            </Popover.Header>
-            <Popover.Body as="p" className="calendar-item-popover-body">
-                    {data.time ? "Time: " + formatAirtableTime(data.time, "AMPM") + " to " + formatAirtableTime(getEndTime(data.time, data.duration),"AMPM"):
-                    data.timeIn ? "Check in time: " + formatAirtableTime(data.timeIn, "AMPM") :
-                    "Check out time: " + formatAirtableTime(data.timeOut, "AMPM")}
-                <br />
-                {data.place? "Address: " + data.place: ""}
-                {type === "flights" ? (
-                        <>
-                            Departure: {data.dep} <br />
-                            Arrival: {data.arr}
-                        </>
-                ) : (
-                    null
-                )}
-            </Popover.Body>
-        </Popover>)
+            <Popover id="popover-basic" className="calendar-item-popover" {...props}>
+                <CalendarItemPopover data={data} type={type} />
+            </Popover>
+        )
     }
 
     return (
@@ -57,6 +46,10 @@ export default function CalendarItem({ data, type, style }) {
                 placement="auto"
                 delay={{ show: 250, hide: 400 }}
                 overlay={renderPopover}
+                defaultShow={showPopover}
+                show={showPopover}
+                onToggle={toggleShow}
+                trigger={type === "newEvent" ? "click": ["hover", "focus"]}
             >
                 <Card
                     className="calendar-card"
@@ -64,8 +57,6 @@ export default function CalendarItem({ data, type, style }) {
                     text={type === "newEvent" ? "secondary" : "light"}
                     bg={background[type]}
                     style={style}
-                    onMouseOver={() => setShow(!show)}
-                    ref={target}
                 >
                     <Card.Body style={{ padding: "2px", lineHeight: "0" }}>
                         <Card.Title className="calendar-card-title">

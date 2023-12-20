@@ -1,16 +1,17 @@
+import { airtableDateRangeToDate } from "../config";
 import { airtableMetaApi } from "./Airtable/airtableApi";
 
 export async function getProjects() {
 
     const projectsJson = await airtableMetaApi("GET")
-    console.log(projectsJson)
     const projects = projectsJson.tables.map(table => {
+        const [start, end] = airtableDateRangeToDate(table.description)
         return {
             name: table.name,
-            start: new Date(JSON.parse(table.description)[0].join("-")),
-            end: new Date(JSON.parse(table.description)[1].join("-"))
+            start,
+            end,
         }
     })
-    console.log(projects)
+    // console.log(projects)
     return projects;
 }
