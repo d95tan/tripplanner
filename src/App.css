@@ -74,3 +74,8 @@
 .calendar-card-text {
     font-size:x-small;
 }
+
+.calendar-item-popover-body {
+    font-size:small;
+    margin: 0;
+}
