@@ -29,7 +29,10 @@ export async function getTripData(project) {
     // console.log("getData");
     
     const raw = await airtableApi(project, "GET");
+    // console.log(raw);
+
     for (const item of raw.records) {
+        const id = item.id;
         const name = item.fields.name;
         const type = item.fields.type?.[0];
         const date = item.fields.date;
@@ -43,6 +46,7 @@ export async function getTripData(project) {
         }
         else if (type === "event") {
             events.push({
+                id,
                 name,
                 date: airtableDateToDate(date),
                 place,
@@ -52,6 +56,7 @@ export async function getTripData(project) {
         }
         else if (type === "info-flight") {
             flights.push({
+                id,
                 name,
                 date: airtableDateToDate(date),
                 dep: JSON.parse(place)[0],
@@ -68,6 +73,7 @@ export async function getTripData(project) {
             const end = new Date(endString);
             // console.log((JSON.parse(date)[0].join(",")));
             accoms.push({
+                id,
                 name,
                 start,
                 end,

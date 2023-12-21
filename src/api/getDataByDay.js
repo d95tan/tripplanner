@@ -30,7 +30,6 @@ export async function getDataByDay(project) {
                 }),
             flights: data.info.flights.filter(flight => isSameDay(flight.date, date)),   // TODO: needs more logic for overnight flights
             weather: data.weather.filter(day => isSameDay(day.date, date))[0],
-            
         };
     });
     // accoms: data.info.accoms.filter((accom)) => accom.date

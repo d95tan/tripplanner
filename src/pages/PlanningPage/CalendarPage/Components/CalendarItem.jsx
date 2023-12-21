@@ -4,6 +4,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import CalendarItemPopover from "./CalendarItemPopover";
 import NewCalendarItemPopover from "./NewCalendarItemPopover";
+import { Badge, Button } from "react-bootstrap";
 
 export default function CalendarItem({ data, type, style, addNewEvent }) {
     const background = {
@@ -12,6 +13,8 @@ export default function CalendarItem({ data, type, style, addNewEvent }) {
         flights: "success",
         accoms: "secondary",
     };
+
+    const [edit, setEdit] = useState(false)
 
     const [showPopover, setShowPopover] = useState(false);
 
@@ -26,18 +29,37 @@ export default function CalendarItem({ data, type, style, addNewEvent }) {
                     <NewCalendarItemPopover
                         time={data.time}
                         date={data.date}
+                        type={"newEvent"}
                         addNewEvent={addNewEvent}
                         setShowPopover={setShowPopover}
                         showPopover={showPopover}
                     />
                 </Popover>
                 );
-            }
+        } else if (edit) {
+            setShowPopover(true)
+            return (
+                <Popover id="popover-newEvent" className="calendar-item-popover" {...props}>
+                    <NewCalendarItemPopover
+                        time={data.time}
+                        date={data.date}
+                        addNewEvent={addNewEvent}
+                        setShowPopover={setShowPopover}
+                        showPopover={showPopover}
+                    />
+                </Popover>
+            )}
         return (
             <Popover id="popover-basic" className="calendar-item-popover" {...props}>
                 <CalendarItemPopover data={data} type={type} />
             </Popover>
         )
+    }
+
+    const handleBadge = () => {
+        if (type !== "newEvent") {
+            setEdit(!edit);
+        }
     }
 
     return (
@@ -49,9 +71,10 @@ export default function CalendarItem({ data, type, style, addNewEvent }) {
                 defaultShow={showPopover}
                 show={showPopover}
                 onToggle={toggleShow}
-                trigger={type === "newEvent" ? "click": ["hover", "focus"]}
+                trigger={type === "newEvent" || edit ? "click": ["hover", "focus"]}
             >
                 <Card
+                    
                     className="calendar-card"
                     border={background[type]}
                     text={type === "newEvent" ? "secondary" : "light"}
@@ -60,13 +83,25 @@ export default function CalendarItem({ data, type, style, addNewEvent }) {
                 >
                     <Card.Body style={{ padding: "2px", lineHeight: "0" }}>
                         <Card.Title className="calendar-card-title">
+                            <div className="calendar-card-title-div" id={type === "newEvent" ? "new-event" : ""}>
                             {data.timeIn ? (
                                 <>Check-in at {data.name}</>
                             ) : data.timeOut ? (
                                 <>Check-out from {data.name}</>
                             ) : (
                                 <>{data.name}</>
-                            )}
+                                )}
+                                </div>
+                            <Badge
+                                onClick={handleBadge}
+                                className="calendar-card-title-badge"
+                                pill
+                                bg={type !== "accoms" ? "dark" : "light"}
+                                text={type !== "accoms" ? "light" : "dark"}
+                                >
+                                {type === "newEvent" ? "X" : "Edit"}
+                            </Badge>
+                            <br/>
                         </Card.Title>
 
                         {data.duration > 2 ? (

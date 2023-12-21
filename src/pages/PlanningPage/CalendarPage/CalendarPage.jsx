@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useOutletContext } from "react-router-dom"
 import CalendarTimeBar from "./Components/CalendarTimeBar";
 import CalendarDay from "./Components/CalendarDay";
@@ -8,11 +9,12 @@ import { airtableDateToDate, dateToAirtableDate } from "../../../config";
 
 export default function CalendarPage() {
     const [data, setData, project] = useOutletContext();
+    const [newEvent, setNewEvent] = useState(null);
     
     const addNewEvent = async (eventInfo) => {
         const body = formatRecordBody({ ...eventInfo, type: "event", date: dateToAirtableDate(eventInfo.date)})
         const response = await airtableApi(project, "POST", body)
-        console.log(response);
+        // console.log(response);
         const tmp = [...data]
         tmp.forEach(day => {
             if (isSameDay(airtableDateToDate(response?.fields?.date), day.date)) {
@@ -42,6 +44,8 @@ export default function CalendarPage() {
                     flights={d.flights}
                     weather={d.weather}
                     addNewEvent={addNewEvent}
+                    newEvent={newEvent}
+                    setNewEvent={setNewEvent}
                 />)}
             </div>
         </>

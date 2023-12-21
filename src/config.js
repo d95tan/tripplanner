@@ -82,7 +82,7 @@ export const formatAirtableTime = (time, format) => {
             HH12 = HH;
         } else {
             AMPM = "PM";
-            HH12 = HH - 12;
+            HH === 12? HH12 = 12 : HH12 = HH - 12;
         }
         const formattedTime = `${HH12}:${MM} ${AMPM}`;
         return formattedTime;

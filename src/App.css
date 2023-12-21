@@ -69,6 +69,28 @@
 
 .calendar-card-title {
     font-size:smaller;
+    /* display: flex;
+    justify-content: space-between; */
+}
+
+.calendar-card-title {
+    font-size:smaller;
+    /* width: 10.75rem; */
+    /* display: flex;
+    justify-content: space-between; */
+    
+}
+
+.calendar-card-title-div {
+    width: 8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+}
+
+.calendar-card-title-badge {
+    float:right;
+    margin-right: 0.1rem
 }
 
 .calendar-card-text {
