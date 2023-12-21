@@ -2,7 +2,7 @@ import { AIRTABLE_KEY } from "../../config";
 
 export async function airtableApi(project, method, data, id) {
     const projectNoSpace = project.replaceAll(" ", "%20")
-    const url = `https://api.airtable.com/v0/appeoaNvKiJI0aZsx/${projectNoSpace}/${id?id:""}`;
+    const url = `https://api.airtable.com/v0/appeoaNvKiJI0aZsx/${projectNoSpace}${id?"/"+id:""}`;
     const options = {
         method,
         headers: {

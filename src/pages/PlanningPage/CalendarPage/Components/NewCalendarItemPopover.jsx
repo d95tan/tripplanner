@@ -15,10 +15,11 @@ export default function NewCalendarItemPopover({
     time,
     duration,
     id,
-    showPopover,
-    setShowPopover,
-    addNewEvent,
     editEvent,
+    setShowPopover,
+    showPopover,
+    addNewEvent,
+    setEdit,
 }) {
     const [info, setInfo] = useState({
         name: oldName || "",
@@ -54,7 +55,8 @@ export default function NewCalendarItemPopover({
 
     const handleCreate = (e) => {
         const createInfo = handleClick(e);
-        // console.log(createInfo)
+        createInfo.type = "event"
+        console.log(createInfo)
         addNewEvent(createInfo);
         setShowPopover(!showPopover);
     };
@@ -63,6 +65,7 @@ export default function NewCalendarItemPopover({
         const editInfo = handleClick(e);
         // console.log(editInfo);
         editEvent(editInfo);
+        setEdit(false);
         setShowPopover(!showPopover);
     };
 
@@ -76,6 +79,7 @@ export default function NewCalendarItemPopover({
                     value={info.name}
                     placeholder="Visit the Museum"
                     onChange={handleChange}
+                    autoComplete="off"
                 />
             </Popover.Header>
             <Popover.Body as="p" className="calendar-item-popover-body">

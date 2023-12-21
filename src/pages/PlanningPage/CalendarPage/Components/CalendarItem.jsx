@@ -52,6 +52,7 @@ export default function CalendarItem({ data, type, style, setNewEvent, addNewEve
                         editEvent={editEvent}
                         setShowPopover={setShowPopover}
                         showPopover={showPopover}
+                        setEdit={setEdit}
                     />
                 </Popover>
             )}
@@ -80,7 +81,6 @@ export default function CalendarItem({ data, type, style, setNewEvent, addNewEve
                 trigger={type === "newEvent" || edit ? "click": ["hover", "focus"]}
             >
                 <Card
-                    
                     className="calendar-card"
                     border={background[type]}
                     text={type === "newEvent" ? "secondary" : "light"}
