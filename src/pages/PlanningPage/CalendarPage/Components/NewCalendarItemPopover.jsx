@@ -1,44 +1,76 @@
 import Popover from "react-bootstrap/Popover";
 import Button from "react-bootstrap/Button";
-import { timeToInputTime, inputTimeToTime, getDuration } from "../../../../config";
+import {
+    timeToInputTime,
+    inputTimeToTime,
+    getDuration,
+} from "../../../../config";
 import { useState } from "react";
 
-export default function NewCalendarItemPopover({ time, date, showPopover, setShowPopover, addNewEvent }) {
-
+export default function NewCalendarItemPopover({
+    oldName,
+    type,
+    date,
+    oldPlace,
+    time,
+    duration,
+    id,
+    showPopover,
+    setShowPopover,
+    addNewEvent,
+    editEvent,
+}) {
     const [info, setInfo] = useState({
-        name: "",
+        name: oldName || "",
+        type,
         date: date,
-        place: "",
+        place: oldPlace || "",
         time: timeToInputTime(time),
-        end: timeToInputTime(time+100),
+        end: duration
+            ? timeToInputTime(time + duration * 50)
+            : timeToInputTime(time + 100),
+        id: id || "",
     });
 
     const handleChange = (e) => {
-        setInfo({...info, [e.target.name]:e.target.value})
+        setInfo({ ...info, [e.target.name]: e.target.value });
     };
-    
+
     const handleClick = (e) => {
         e.preventDefault();
         // TODO: Check if end time is after start (duration > 1, i.e. >= 1h)
         // TODO: Round end time to nearest half hour.
-        console.log(info);
         const eventInfo = {
             name: info.name,
             date: info.date,
             place: info.place,
             time: inputTimeToTime(info.time),
-            duration: getDuration(info.time, info.end)
-        }
-        console.log(eventInfo)
-        addNewEvent(eventInfo);
-        setShowPopover(!showPopover)
+            duration: getDuration(info.time, info.end),
+            type: info.type,
+            id: info.id,
+        };
+        return eventInfo;
+    };
 
-    }
+    const handleCreate = (e) => {
+        const createInfo = handleClick(e);
+        // console.log(createInfo)
+        addNewEvent(createInfo);
+        setShowPopover(!showPopover);
+    };
+
+    const handleEdit = (e) => {
+        const editInfo = handleClick(e);
+        // console.log(editInfo);
+        editEvent(editInfo);
+        setShowPopover(!showPopover);
+    };
 
     return (
         <>
             <Popover.Header as="h3">
-                Title: <input
+                Title:{" "}
+                <input
                     name="name"
                     type="text"
                     value={info.name}
@@ -47,23 +79,27 @@ export default function NewCalendarItemPopover({ time, date, showPopover, setSho
                 />
             </Popover.Header>
             <Popover.Body as="p" className="calendar-item-popover-body">
-                <label>Start Time: </label>
+                Start Time:{" "}
                 <input
                     className="new-calendar-item-popover-input"
                     name="time"
                     type="time"
                     value={info.time}
                     disabled
-                /> <br />
-                End Time: <input
+                />{" "}
+                <br />
+                End Time:{" "}
+                <input
                     className="new-calendar-item-popover-input"
                     name="end"
                     type="time"
                     onChange={handleChange}
                     value={info.end}
                     min={info.end}
-                /> <br />
-                Location: <input
+                />{" "}
+                <br />
+                Location:{" "}
+                <input
                     className="new-calendar-item-popover-input"
                     name="place"
                     type="text"
@@ -72,7 +108,15 @@ export default function NewCalendarItemPopover({ time, date, showPopover, setSho
                     placeholder="11 W 53rd St, New York, NY 10019"
                     autoComplete="off"
                 />
-                <Button size="sm" onClick={handleClick}>Create!</Button>
+                {type === "newEvent" ? (
+                    <Button size="sm" onClick={handleCreate}>
+                        Create!
+                    </Button>
+                ) : (
+                    <Button size="sm" onClick={handleEdit}>
+                        Save
+                    </Button>
+                )}
             </Popover.Body>
         </>
     );

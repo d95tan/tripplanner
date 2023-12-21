@@ -1,6 +1,12 @@
 export function formatRecordBody({ name, type, date, place, time, duration }) {
     
-    const typeArr = [type];
+    const typeConvert = {
+        events: "event",
+        accoms: "info-accoms",
+        flights: "info-flight"
+    }
+
+    const typeArr = [typeConvert[type]];
 
     const body = {
         fields: {

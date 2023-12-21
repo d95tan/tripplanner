@@ -31,6 +31,62 @@ export default function CalendarPage() {
         })
     }
 
+    const editEvent = async (eventInfo) => {
+        const body = formatRecordBody({ ...eventInfo, date: dateToAirtableDate(eventInfo.date) });
+        const response = await airtableApi(project, "PATCH", body, eventInfo.id)
+        console.log(response);
+        const tmp = structuredClone(data);
+        const fields = response.fields;
+
+        for (let i = 0; i < tmp.length;  i++) {
+            if (isSameDay(airtableDateToDate(response?.fields?.date), tmp[i].date)) {
+                for (let j = 0; j < tmp[i].events.length; j++) {
+                    if (tmp[i][fields.type[0]][j].id === response.id) {
+                        const updated = {
+                            name: fields.name,
+                            type: fields.type?.[0],
+                            place: fields.place,
+                            date: airtableDateToDate(fields.date),
+                            time: fields.time,
+                            duration: fields.duration,
+                            id: response.id,
+                        }
+                        console.log(updated);
+                        tmp[i].events[j] = { ...updated };
+                        setData(tmp);
+                    }
+                    
+                }
+            }
+        }
+
+        // tmp.forEach(day => {
+        //     if (isSameDay(airtableDateToDate(response?.fields?.date), day.date)) {
+        //         const fields = response?.fields;
+        //         day.events.forEach(event => {
+        //             console.log(event)
+        //             console.log(fields)
+        //             if (event.id === response.id) {
+        //                 tmp.day.event = {
+        //                     name: fields.name,
+        //                     type: fields.type[0],
+        //                     place: fields.place,
+        //                     date: airtableDateToDate(fields.date),
+        //                     time: fields.time,
+        //                     duration: fields.duration,
+        //                     id: response.id,
+        //                 }
+        //                 console.log(event)
+        //                 console.log(tmp)
+        //                 setData(tmp);
+        //                 return;
+        //             }
+        //         }) 
+        //     }
+        // })
+
+    }
+
     return (
         <>
             <div className="calendar-container">
@@ -43,9 +99,10 @@ export default function CalendarPage() {
                     accoms={d.accoms}
                     flights={d.flights}
                     weather={d.weather}
-                    addNewEvent={addNewEvent}
                     newEvent={newEvent}
                     setNewEvent={setNewEvent}
+                    addNewEvent={addNewEvent}
+                    editEvent={editEvent}
                 />)}
             </div>
         </>

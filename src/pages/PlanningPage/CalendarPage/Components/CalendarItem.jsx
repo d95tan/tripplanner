@@ -6,7 +6,7 @@ import CalendarItemPopover from "./CalendarItemPopover";
 import NewCalendarItemPopover from "./NewCalendarItemPopover";
 import { Badge, Button } from "react-bootstrap";
 
-export default function CalendarItem({ data, type, style, addNewEvent }) {
+export default function CalendarItem({ data, type, style, setNewEvent, addNewEvent, editEvent}) {
     const background = {
         events: "primary",
         newEvent: "info",
@@ -30,9 +30,10 @@ export default function CalendarItem({ data, type, style, addNewEvent }) {
                         time={data.time}
                         date={data.date}
                         type={"newEvent"}
-                        addNewEvent={addNewEvent}
-                        setShowPopover={setShowPopover}
                         showPopover={showPopover}
+                        setShowPopover={setShowPopover}
+                        addNewEvent={addNewEvent}
+                        editEvent={editEvent}
                     />
                 </Popover>
                 );
@@ -41,9 +42,14 @@ export default function CalendarItem({ data, type, style, addNewEvent }) {
             return (
                 <Popover id="popover-newEvent" className="calendar-item-popover" {...props}>
                     <NewCalendarItemPopover
-                        time={data.time}
+                        oldName={data.name}
+                        type={type}
+                        time={data.time || data.timeIn || data.timeOut}
+                        duration={data.duration || 2}
                         date={data.date}
-                        addNewEvent={addNewEvent}
+                        oldPlace={data.place}
+                        id={data.id}
+                        editEvent={editEvent}
                         setShowPopover={setShowPopover}
                         showPopover={showPopover}
                     />
@@ -59,7 +65,7 @@ export default function CalendarItem({ data, type, style, addNewEvent }) {
     const handleBadge = () => {
         if (type !== "newEvent") {
             setEdit(!edit);
-        }
+        } else { setNewEvent(null) }
     }
 
     return (
@@ -92,15 +98,19 @@ export default function CalendarItem({ data, type, style, addNewEvent }) {
                                 <>{data.name}</>
                                 )}
                                 </div>
-                            <Badge
-                                onClick={handleBadge}
-                                className="calendar-card-title-badge"
-                                pill
-                                bg={type !== "accoms" ? "dark" : "light"}
-                                text={type !== "accoms" ? "light" : "dark"}
+                            {type === "events" || type === "newEvent" ? (
+                                <Badge
+                                    onClick={handleBadge}
+                                    className="calendar-card-title-badge"
+                                    pill
+                                    bg={type !== "accoms" ? "dark" : "light"}
+                                    text={type !== "accoms" ? "light" : "dark"}
                                 >
-                                {type === "newEvent" ? "X" : "Edit"}
-                            </Badge>
+                                    {type === "newEvent" ? "X" : "Edit"}
+                                </Badge>
+                            ) : (
+                                <></>
+                            )}
                             <br/>
                         </Card.Title>
 
