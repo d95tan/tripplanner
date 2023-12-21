@@ -20,6 +20,7 @@ export default function NewCalendarItemPopover({
     showPopover,
     addNewEvent,
     setEdit,
+    deleteEvent,
 }) {
     const [info, setInfo] = useState({
         name: oldName || "",
@@ -40,7 +41,6 @@ export default function NewCalendarItemPopover({
     const handleClick = (e) => {
         e.preventDefault();
         // TODO: Check if end time is after start (duration > 1, i.e. >= 1h)
-        // TODO: Round end time to nearest half hour.
         const eventInfo = {
             name: info.name,
             date: info.date,
@@ -55,8 +55,8 @@ export default function NewCalendarItemPopover({
 
     const handleCreate = (e) => {
         const createInfo = handleClick(e);
-        createInfo.type = "event"
-        console.log(createInfo)
+        createInfo.type = "event";
+        console.log(createInfo);
         addNewEvent(createInfo);
         setShowPopover(!showPopover);
     };
@@ -65,6 +65,14 @@ export default function NewCalendarItemPopover({
         const editInfo = handleClick(e);
         // console.log(editInfo);
         editEvent(editInfo);
+        setEdit(false);
+        setShowPopover(!showPopover);
+    };
+
+    const handleDelete = (e) => {
+        const deleteInfo = handleClick(e);
+        console.log(deleteInfo);
+        deleteEvent(deleteInfo.id)
         setEdit(false);
         setShowPopover(!showPopover);
     };
@@ -113,13 +121,34 @@ export default function NewCalendarItemPopover({
                     autoComplete="off"
                 />
                 {type === "newEvent" ? (
-                    <Button size="sm" onClick={handleCreate}>
+                    <Button
+                        size="sm"
+                        onClick={handleCreate}
+                        style={{ marginTop: "0.3rem" }}
+                    >
                         Create!
                     </Button>
                 ) : (
-                    <Button size="sm" onClick={handleEdit}>
-                        Save
-                    </Button>
+                    <>
+                        <Button
+                            size="sm"
+                            onClick={handleEdit}
+                            style={{ marginTop: "0.3rem" }}
+                        >
+                            Save
+                        </Button>
+                        <Button
+                            size="sm"
+                            variant="danger"
+                            onClick={handleDelete}
+                            style={{
+                                marginTop: "0.3rem",
+                                marginLeft: "0.3rem",
+                            }}
+                        >
+                            Delete
+                        </Button>
+                    </>
                 )}
             </Popover.Body>
         </>

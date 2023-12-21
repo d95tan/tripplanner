@@ -34,6 +34,7 @@ export default function CalendarPage() {
                     id: response.id,
                 });
                 setData(tmp);
+                return;
             }
         });
     };
@@ -69,11 +70,32 @@ export default function CalendarPage() {
                         console.log(updated);
                         tmp[i].events[j] = { ...updated };
                         setData(tmp);
+                        return;
                     }
                 }
             }
         }
     };
+
+    const deleteEvent = async (id) => {
+        const response = await airtableApi(
+            project,
+            "DELETE",
+            "",
+            id
+        )
+        console.log(response);
+        const tmp = structuredClone(data);
+        for (let i = 0; i < tmp.length; i++) {
+            for (let j = 0; j < tmp[i].events.length; j++) {
+                if (tmp[i].events[j].id === id) {
+                    tmp[i].events.splice(j, 1);
+                    setData(tmp);
+                    return;
+                }
+            }
+        }
+    }
 
     return (
         <>
@@ -92,6 +114,7 @@ export default function CalendarPage() {
                         setNewEvent={setNewEvent}
                         addNewEvent={addNewEvent}
                         editEvent={editEvent}
+                        deleteEvent={deleteEvent}
                     />
                 ))}
             </div>

@@ -19,6 +19,7 @@ export default function CalendarDay({
     setNewEvent,
     addNewEvent,
     editEvent,
+    deleteEvent,
 }) {
     const dateString = format(date, "eee, do MMM yy");
     const weatherString = `H: ${weather.high}, L:${weather.low} ${weather.weatherString ? weather.weatherString : ""
@@ -82,6 +83,7 @@ export default function CalendarDay({
                                 }}
                             />
                         ) : null}
+                        
                         {events.map((e) => {
                             const { top, height } = calculatePosition(
                                 e.time,
@@ -93,6 +95,7 @@ export default function CalendarDay({
                                     data={e}
                                     type="events"
                                     editEvent={editEvent}
+                                    deleteEvent={deleteEvent}
                                     style={{
                                         position: "absolute",
                                         top: `${top}rem`,
@@ -114,6 +117,7 @@ export default function CalendarDay({
                                     data={e}
                                     type="flights"
                                     editEvent={editEvent}
+                                    deleteEvent={deleteEvent}
                                     style={{
                                         position: "absolute",
                                         top: `${top}rem`,
@@ -139,6 +143,7 @@ export default function CalendarDay({
                                     data={e}
                                     type="accoms"
                                     editEvent={editEvent}
+                                    deleteEvent={deleteEvent}
                                     style={{
                                         position: "absolute",
                                         top: `${top}rem`,
@@ -149,6 +154,23 @@ export default function CalendarDay({
                             );
                         })}
                     </div>
+                    {(accoms.length !== 1 ? accoms.filter(a => a.timeIn !== null) : accoms).map((e) => {
+                            return (
+                                <CalendarItem
+                                    key={e.name}
+                                    data={{...e, duration: 3}}
+                                    type="accomsInfo"
+                                    editEvent={editEvent}
+                                    deleteEvent={deleteEvent}
+                                    style={{
+                                        position: "absolute",
+                                        top: `39.7rem`,
+                                        height: `3rem`,
+                                        boxShadow: "-1px -1px 3px lightgrey inset",
+                                    }}
+                                />
+                            );
+                        })}
                 </Card.Body>
             </Card>
         );

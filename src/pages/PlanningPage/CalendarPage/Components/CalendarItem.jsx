@@ -6,26 +6,39 @@ import CalendarItemPopover from "./CalendarItemPopover";
 import NewCalendarItemPopover from "./NewCalendarItemPopover";
 import Badge from "react-bootstrap/Badge";
 
-export default function CalendarItem({ data, type, style, setNewEvent, addNewEvent, editEvent}) {
+export default function CalendarItem({
+    data,
+    type,
+    style,
+    setNewEvent,
+    addNewEvent,
+    editEvent,
+    deleteEvent,
+}) {
     const background = {
         events: "primary",
         newEvent: "info",
         flights: "success",
         accoms: "secondary",
+        accomsInfo: "secondary"
     };
 
-    const [edit, setEdit] = useState(false)
+    const [edit, setEdit] = useState(false);
 
     const [showPopover, setShowPopover] = useState(false);
 
     const toggleShow = (show) => {
         setShowPopover(show);
-    }
+    };
 
     const renderPopover = (props) => {
         if (type === "newEvent") {
             return (
-                <Popover id="popover-newEvent" className="calendar-item-popover" {...props}>
+                <Popover
+                    id="popover-newEvent"
+                    className="calendar-item-popover"
+                    {...props}
+                >
                     <NewCalendarItemPopover
                         time={data.time}
                         date={data.date}
@@ -36,11 +49,17 @@ export default function CalendarItem({ data, type, style, setNewEvent, addNewEve
                         editEvent={editEvent}
                     />
                 </Popover>
-                );
+            );
+        } else if (type === "accomsInfo") {
+            return;
         } else if (edit) {
-            setShowPopover(true)
+            setShowPopover(true);
             return (
-                <Popover id="popover-newEvent" className="calendar-item-popover" {...props}>
+                <Popover
+                    id="popover-newEvent"
+                    className="calendar-item-popover"
+                    {...props}
+                >
                     <NewCalendarItemPopover
                         oldName={data.name}
                         type={type}
@@ -49,25 +68,33 @@ export default function CalendarItem({ data, type, style, setNewEvent, addNewEve
                         date={data.date}
                         oldPlace={data.place}
                         id={data.id}
-                        editEvent={editEvent}
                         setShowPopover={setShowPopover}
                         showPopover={showPopover}
                         setEdit={setEdit}
+                        editEvent={editEvent}
+                        deleteEvent={deleteEvent}
                     />
                 </Popover>
-            )}
+            );
+        }
         return (
-            <Popover id="popover-basic" className="calendar-item-popover" {...props}>
+            <Popover
+                id="popover-basic"
+                className="calendar-item-popover"
+                {...props}
+            >
                 <CalendarItemPopover data={data} type={type} />
             </Popover>
-        )
-    }
+        );
+    };
 
     const handleBadge = () => {
         if (type !== "newEvent") {
             setEdit(!edit);
-        } else { setNewEvent(null) }
-    }
+        } else {
+            setNewEvent(null);
+        }
+    };
 
     return (
         <>
@@ -78,7 +105,9 @@ export default function CalendarItem({ data, type, style, setNewEvent, addNewEve
                 defaultShow={showPopover}
                 show={showPopover}
                 onToggle={toggleShow}
-                trigger={type === "newEvent" || edit ? "click": ["hover", "focus"]}
+                trigger={
+                    type === "newEvent" || edit ? "click" : type === "accomsInfo" ? [] : ["hover", "focus"]
+                }
             >
                 <Card
                     className="calendar-card"
@@ -89,15 +118,20 @@ export default function CalendarItem({ data, type, style, setNewEvent, addNewEve
                 >
                     <Card.Body style={{ padding: "2px", lineHeight: "0" }}>
                         <Card.Title className="calendar-card-title">
-                            <div className="calendar-card-title-div" id={type === "newEvent" ? "new-event" : ""}>
-                            {data.timeIn ? (
-                                <>Check-in at {data.name}</>
-                            ) : data.timeOut ? (
-                                <>Check-out from {data.name}</>
-                            ) : (
-                                <>{data.name}</>
+                            <div
+                                className="calendar-card-title-div"
+                                id={type === "newEvent" ? "new-event" : ""}
+                            >
+                                {type !== "accomsInfo" ? data.timeIn ? (
+                                    <>Check-in at {data.name}</>
+                                ) : data.timeOut ? (
+                                    <>Check-out from {data.name}</>
+                                ) : (
+                                    <>{data.name}</>
+                                ) : (
+                                    <>Stay at: {data.name}</> 
                                 )}
-                                </div>
+                            </div>
                             {type === "events" || type === "newEvent" ? (
                                 <Badge
                                     onClick={handleBadge}
@@ -111,23 +145,20 @@ export default function CalendarItem({ data, type, style, setNewEvent, addNewEve
                             ) : (
                                 <></>
                             )}
-                            <br/>
+                            <br />
                         </Card.Title>
 
                         {data.duration > 2 ? (
-                            <Card.Text className="calendar-card-text">
-                                {data.place}
-                            </Card.Text>
-                        ) : (
-                            <></>
-                        )}
-                        {type === "flights" ? (
-                            <Card.Text className="calendar-card-text">
-                                {data.dep} ➡️ {data.arr}
-                            </Card.Text>
-                        ) : (
-                            <></>
-                        )}
+                            type === "flights" ? (
+                                <Card.Text className="calendar-card-text">
+                                    {data.dep} ➡️ {data.arr}
+                                </Card.Text>
+                            ) : (
+                                <Card.Text className="calendar-card-text">
+                                    {data.place}
+                                </Card.Text>
+                            )) : (<></>)}
+                            
                     </Card.Body>
                 </Card>
             </OverlayTrigger>

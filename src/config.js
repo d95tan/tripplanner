@@ -114,7 +114,6 @@ export const timeToInputTime = (time) => {
     return formatted;
 };
 
-// TODO: Needs to round off to nearest half hour
 export const inputTimeToTime = (inputTime) => {
     const [hh, mm] = inputTime.split(":").map((x) => parseInt(x));
     let roundH, roundM;
