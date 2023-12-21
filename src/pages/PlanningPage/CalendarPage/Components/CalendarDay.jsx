@@ -5,9 +5,9 @@ import {
     SLOT_HEIGHT,
     calculatePosition,
     intToTime,
+    noClash
 } from "../../../../config";
 import { format } from "date-fns";
-import { useState } from "react";
 
 export default function CalendarDay({
     date,
@@ -23,11 +23,6 @@ export default function CalendarDay({
     const dateString = format(date, "eee, do MMM yy");
     const weatherString = `H: ${weather.high}, L:${weather.low} ${weather.weatherString ? weather.weatherString : ""
         }`;
-
-    // TODO: checks if the new event clashes (perhaps should be outsourced to config file)
-    const noClash = (time, events, flights) => {
-        return true;
-    };
 
     const handleClick = (e) => {
         // console.log(e.target)

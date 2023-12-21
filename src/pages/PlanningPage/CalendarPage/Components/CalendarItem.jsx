@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Card from "react-bootstrap/Card";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import CalendarItemPopover from "./CalendarItemPopover";
 import NewCalendarItemPopover from "./NewCalendarItemPopover";
-import { Badge, Button } from "react-bootstrap";
+import Badge from "react-bootstrap/Badge";
 
 export default function CalendarItem({ data, type, style, setNewEvent, addNewEvent, editEvent}) {
     const background = {

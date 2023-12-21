@@ -82,7 +82,7 @@ export const formatAirtableTime = (time, format) => {
             HH12 = HH;
         } else {
             AMPM = "PM";
-            HH === 12? HH12 = 12 : HH12 = HH - 12;
+            HH === 12 ? (HH12 = 12) : (HH12 = HH - 12);
         }
         const formattedTime = `${HH12}:${MM} ${AMPM}`;
         return formattedTime;
@@ -114,8 +114,21 @@ export const timeToInputTime = (time) => {
     return formatted;
 };
 
+// TODO: Needs to round off to nearest half hour
 export const inputTimeToTime = (inputTime) => {
-    return parseInt(inputTime.replace(":", ""));
+    const [hh, mm] = inputTime.split(":").map((x) => parseInt(x));
+    let roundH, roundM;
+    if (mm < 16) {
+        roundH = hh;
+        roundM = 0;
+    } else if (mm < 46) {
+        roundH = hh;
+        roundM = 30;
+    } else {
+        roundH = hh + 1;
+        roundM = 0;
+    }
+    return roundH * 100 + roundM;
 };
 
 export const getDuration = (start, end) => {
@@ -139,5 +152,9 @@ export const airtableDateRangeToDate = (airtableDateRange) => {
     const arr = JSON.parse(airtableDateRange);
     const start = new Date(arr[0].join("-"));
     const end = new Date(arr[1].join("-"));
-    return [start, end]
+    return [start, end];
+};
+// TODO: checks if the new event clashes (perhaps should be outsourced to config file)
+export const noClash = (time, events, flights) => {
+    return true;
 };
