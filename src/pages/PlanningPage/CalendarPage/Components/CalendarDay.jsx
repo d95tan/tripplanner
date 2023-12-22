@@ -165,7 +165,7 @@ export default function CalendarDay({
                                     style={{
                                         position: "absolute",
                                         top: `39.7rem`,
-                                        height: `3rem`,
+                                        height: `4rem`,
                                         boxShadow: "-1px -1px 3px lightgrey inset",
                                     }}
                                 />

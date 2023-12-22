@@ -129,7 +129,7 @@ export default function CalendarItem({
                                 ) : (
                                     <>{data.name}</>
                                 ) : (
-                                    <>Stay at: {data.name}</> 
+                                    <>{data.name} </> 
                                 )}
                             </div>
                             {type === "events" || type === "newEvent" ? (
