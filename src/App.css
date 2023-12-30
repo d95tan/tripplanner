@@ -1,3 +1,28 @@
+.landing-page-div {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    padding: 2% 6% 2% 6%;
+}
+
+.gradient-background {
+    background: rgb(204,222,254);
+    background: linear-gradient(90deg, rgba(204,222,254,1) 18%, rgba(125,186,251,1) 47%, rgba(35,158,254,1) 71%, rgba(1,175,208,1) 100%);
+}
+
+.landing-page-text {
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.landing-page-first-img {
+    width: 65%;
+}
+
+.landing-page-edit-img {
+    width: 35% ;
+}
+
 .credentials {
     border: 1px solid grey;
     border-radius: 10px;

@@ -22,7 +22,7 @@ export default function NavbarIn({ projectsArr }) {
     const active = !!project;
 
     return (
-        <Navbar>
+        <Navbar sticky="top" bg="light">
             <Container>
                 <Nav className="mr-auto">
                 <Navbar.Brand as={NavLink} to="/planning">

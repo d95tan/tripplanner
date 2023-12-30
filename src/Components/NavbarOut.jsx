@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 
 export default function NavbarOut() {
     return (
-        <Navbar>
+        <Navbar sticky="top" bg="light">
             <Container>
                 <Navbar.Brand as={NavLink} to="/">
                     <img
