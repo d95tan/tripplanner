@@ -8,5 +8,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <BrowserRouter>
             <App />
         </BrowserRouter>
+        <footer style={{textAlign: "center"}}>© 2024 By <a id="github" href="https://github.com/d95tan/tetris-by-dan">Dan</a></footer>
     </React.StrictMode>
 );
