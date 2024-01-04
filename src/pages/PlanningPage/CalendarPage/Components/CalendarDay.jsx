@@ -22,8 +22,8 @@ export default function CalendarDay({
     deleteEvent,
 }) {
     const dateString = format(date, "eee, do MMM yy");
-    const weatherString = `H: ${weather.high}, L:${weather.low} ${weather.weatherString ? weather.weatherString : ""
-        }`;
+    const weatherString = weather ? `H: ${weather.high}, L:${weather.low} ${weather.weatherString ? weather.weatherString : ""
+        }` : "Not available";
 
     const handleClick = (e) => {
         // console.log(e.target)
