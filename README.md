@@ -1,6 +1,9 @@
-# WanderWell - The Travel Itinerary Planning Web App
+# <img src="./public/tp-logo.svg" alt="WanderWell Logo" width = 36pt /> [WanderWell - The Travel Itinerary Planning Web App](https://wanderwell.vercel.app/)
 
-WanderWell is a web application designed to help users plan their travel itineraries efficiently. The app enables users to organise their trips, add events, manage accomodations, and stay updated with weather forecasts during their trip.
+[WanderWell](https://wanderwell.vercel.app/) is a web application designed to help users plan their travel itineraries efficiently. The app enables users to organise their trips, add events, manage accomodations, and stay updated with weather forecasts during their trip.
+
+<img src="./public/SS-Landing Page.png" alt="landing page" width = 600px /> 
+<img src="./public/SS-Planning Page.png" alt="landing page" width = 600px /> 
 
 ## Features
 - **Itinerary Planning**: Create, edit and manage travel itineraries with ease
@@ -19,6 +22,6 @@ WanderWell is a web application designed to help users plan their travel itinera
 - **Edit Events**: Edit events by clicking on the edit button
 
 ## Future implementations
-- Finance management features: Allows users to check exchange rates, split and track expenses
-- Places page: Allows users to add potential places to visit without creating a new "event"
-- Drag-and-drop functionality: Allow users to drag-and-drop events around to change its time
+- **Finance management features:** Allows users to check exchange rates, split and track expenses
+- **Places page:** Allows users to add potential places to visit without creating a new "event"
+- **Drag-and-drop functionality:** Allow users to drag-and-drop events around to change its time
