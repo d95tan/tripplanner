@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -57,8 +57,12 @@ export default function Loginpage() {
                 <Button variant="primary" type="submit">
                     Log in
                 </Button>
+                <Link to="/planning/" style={{marginLeft: "auto", marginRight: "auto"}}>
+                    Proceed as guest
+                </ Link>
                         {error && <><br /><Alert variant="danger">{error}</Alert></>}
             </Form>
+            <br />
 
             {/* <div>
             <label>Email: </label>

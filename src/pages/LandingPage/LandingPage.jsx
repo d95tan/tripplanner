@@ -9,8 +9,8 @@ export default function LandingPage() {
             <div className="landing-page-text">
                 <h1>Welcome to WanderWell!</h1>
                 <h5>Plan Your Perfect Trip with Ease</h5><br />
-                <Button variant="primary" as={NavLink} to="/signup">
-                    Sign Up for free
+                <Button variant="primary" as={NavLink} to="/planning">
+                    Try for free now!
                 </Button>
             </div>
             <img className="landing-page-first-img" src="Isometric Planning Page.png" />
